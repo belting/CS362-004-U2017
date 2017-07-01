@@ -298,3 +298,11 @@ __pycache__/
 *.sln
 *.vcxproj
 *.vcxproj.filters
+
+# Built files
+*.o
+*.gcno
+badTestDrawCard
+playdom
+player
+testDrawCard
