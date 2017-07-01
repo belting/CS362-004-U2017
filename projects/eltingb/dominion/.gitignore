@@ -302,6 +302,7 @@ __pycache__/
 # Built files
 *.o
 *.gcno
+*.gcda
 badTestDrawCard
 playdom
 player
