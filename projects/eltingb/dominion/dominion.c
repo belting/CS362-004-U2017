@@ -1253,6 +1253,7 @@ int playAdventurer(struct gameState *state, int currentPlayer) {
 }
 
 int playRemodel(struct gameState *state, int currentPlayer, int choice1, int choice2, int handPos) {
+    int i;
     int j = state->hand[currentPlayer][choice1];  //store card we will trash
 
     if ((getCost(state->hand[currentPlayer][choice1]) + 4) > getCost(choice2))
@@ -1266,7 +1267,7 @@ int playRemodel(struct gameState *state, int currentPlayer, int choice1, int cho
     discardCard(handPos, currentPlayer, state, 0);
 
     //discard trashed card
-    for (int i = 0; i < state->handCount[currentPlayer]; i++)
+    for (i = 0; i < state->handCount[currentPlayer]; i++)
     {
         if (state->hand[currentPlayer][i] == j)
         {
@@ -1280,8 +1281,10 @@ int playRemodel(struct gameState *state, int currentPlayer, int choice1, int cho
 }
 
 int playSmithy(struct gameState *state, int currentPlayer, int handPos) {
+    int i;
+
     //+3 Cards
-    for (int i = 0; i < 1; i++)
+    for (i = 0; i < 1; i++)
     {
         drawCard(currentPlayer, state);
     }
