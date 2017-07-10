@@ -12,6 +12,14 @@ void assertFail(const char *msg, const char *file, int line) {
     testCount++;
 }
 
+void assertEqualsFail(int actual, int expected, const char *file, int line) {
+#if VERBOSE == 1
+    printf("FAIL (Actual: %d, Expected: %d) (%s:%d)\n", actual, expected, file, line);
+#endif // VERBOSE == 1
+
+    testCount++;
+}
+
 void assertPass() {
 #if VERBOSE == 1
     printf("PASS\n");

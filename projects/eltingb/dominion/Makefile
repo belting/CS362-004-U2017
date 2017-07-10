@@ -30,6 +30,9 @@ testHelpers.o: testHelpers.h testHelpers.c
 unittest1: unittest1.c dominion.o rngs.o testHelpers.o
 	gcc -o unittest1 -g  unittest1.c dominion.o rngs.o testHelpers.o $(CFLAGS)
 
+unittest2: unittest2.c dominion.o rngs.o testHelpers.o
+	gcc -o unittest2 -g  unittest2.c dominion.o rngs.o testHelpers.o $(CFLAGS)
+
 runtests: testDrawCard 
 	./testDrawCard &> unittestresult.out
 	gcov dominion.c >> unittestresult.out

@@ -21,7 +21,9 @@ int main() {
     struct gameState G;
     int k[10] = { adventurer, council_room, feast, gardens, mine, remodel, smithy, village, baron, great_hall };
     int testCards[NUM_TEST_CARDS] = { gold, province, village, gardens };
-    int testCardCounts[NUM_TEST_CARDS] = { 0, 0 ,0 };
+    int testCardCounts[NUM_TEST_CARDS];
+    int actualCount;
+    int expectedCount;
 
     printf("Testing fullDeckCount():\n");
 
@@ -64,7 +66,9 @@ int main() {
 #if VERBOSE == 1
                         printf("Test player %d with %d deck cards, %d hand cards, %d discard cards, counting card %d: ", player, deckCount, handCount, discardCount, testCards[i]);
 #endif // VERBOSE == 1
-                        assert(fullDeckCount(player, testCards[i], &G) == testCardCounts[i]);
+                        actualCount = fullDeckCount(player, testCards[i], &G);
+                        expectedCount = testCardCounts[i];
+                        assertEquals(actualCount, expectedCount);
                     }
 
                 }
