@@ -7,7 +7,7 @@
 
 #define NUM_TEST_CARDS 6
 
-int getExpectedScore(int cards[]) {
+int getExpectedCoins(int cards[]) {
     int i;
     int cardCount = 0;
     int score = 0;
@@ -16,7 +16,7 @@ int getExpectedScore(int cards[]) {
         cardCount += cards[i];
     }
 
-    score = cards[0] * -1; // Curse
+    score += cards[0] * -1; // Curse
     score += cards[1] * 1; // Estate
     score += cards[2] * 3; // Duchy
     score += cards[3] * 6; // Province
@@ -83,11 +83,11 @@ int main() {
                         testCardCounts[i % NUM_TEST_CARDS]++;
                     }
 
-                    expectedScore = getExpectedScore(testCardCounts);
+                    expectedScore = getExpectedCoins(testCardCounts);
                     actualScore = scoreFor(player, &G);
 
 #if VERBOSE == 1
-                    printf("Test player %d with %d deck cards, %d hand cards, %d discard cards: ", player, deckCount, handCount, discardCount);
+                    printf("Test player %d with %d deck cards, %d hand cards, %d discard cards, using mixed cards: ", player, deckCount, handCount, discardCount);
 #endif // VERBOSE == 1
                     assertEquals(actualScore, expectedScore);
 
@@ -122,11 +122,11 @@ int main() {
                             testCardCounts[testCard]++;
                         }
 
-                        expectedScore = getExpectedScore(testCardCounts);
+                        expectedScore = getExpectedCoins(testCardCounts);
                         actualScore = scoreFor(player, &G);
 
 #if VERBOSE == 1
-                        printf("Test player %d with %d deck cards, %d hand cards, %d discard cards, of card %d: ", player, deckCount, handCount, discardCount, testCards[testCard]);
+                        printf("Test player %d with %d deck cards, %d hand cards, %d discard cards, using card %d: ", player, deckCount, handCount, discardCount, testCards[testCard]);
 #endif // VERBOSE == 1
                         assertEquals(actualScore, expectedScore);
                     }
