@@ -24,6 +24,12 @@ testAll: dominion.o testSuite.c
 interface.o: interface.h interface.c
 	gcc -c interface.c -g  $(CFLAGS)
 
+testHelpers.o: testHelpers.h testHelpers.c
+	gcc -c testHelpers.c -g  $(CFLAGS)
+
+unittest1: unittest1.c dominion.o rngs.o testHelpers.o
+	gcc -o unittest1 -g  unittest1.c dominion.o rngs.o testHelpers.o $(CFLAGS)
+
 runtests: testDrawCard 
 	./testDrawCard &> unittestresult.out
 	gcov dominion.c >> unittestresult.out
