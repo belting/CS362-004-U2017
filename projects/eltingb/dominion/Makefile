@@ -39,6 +39,9 @@ unittest3: unittest3.c dominion.o rngs.o testHelpers.o
 unittest4: unittest4.c dominion.o rngs.o testHelpers.o
 	gcc -o unittest4 -g  unittest4.c dominion.o rngs.o testHelpers.o $(CFLAGS)
 
+cardtest1: cardtest1.c dominion.o rngs.o testHelpers.o
+	gcc -o cardtest1 -g  cardtest1.c dominion.o rngs.o testHelpers.o $(CFLAGS)
+
 runtests: testDrawCard 
 	./testDrawCard &> unittestresult.out
 	gcov dominion.c >> unittestresult.out
