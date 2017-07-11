@@ -63,9 +63,8 @@ int main() {
 
                     // Run tests for all test cards
                     for (i = 0; i < NUM_TEST_CARDS; i++) {
-#if VERBOSE == 1
-                        printf("Test player %d with %d deck cards, %d hand cards, %d discard cards, counting card %d: ", player, deckCount, handCount, discardCount, testCards[i]);
-#endif // VERBOSE == 1
+                        debug("Test player %d with %d deck cards, %d hand cards, %d discard cards, counting card %d: ", player, deckCount, handCount, discardCount, testCards[i]);
+
                         actualCount = fullDeckCount(player, testCards[i], &G);
                         expectedCount = testCardCounts[i];
                         assertEquals(actualCount, expectedCount);

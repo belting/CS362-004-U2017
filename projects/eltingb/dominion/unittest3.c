@@ -29,10 +29,7 @@ int main() {
     memset(&G, 23, sizeof(struct gameState));
     initializeGame(numPlayer, k, seed, &G);
 
-#if VERBOSE == 1
-    printf("Test if game over after initializing game: ");
-#endif // VERBOSE == 1
-
+    debug("Test if game over after initializing game: ");
     assertEquals(isGameOver(&G), 0);
 
     for (emptyPiles = 0; emptyPiles <= MAX_EMPTY_PILES; emptyPiles++) {
@@ -59,10 +56,7 @@ int main() {
                 }
             }
 
-#if VERBOSE == 1
-            printf("Test if game over when %d supply piles are empty, beginning with card %d: ", emptyPiles, testCards[startTestCard]);
-#endif // VERBOSE == 1
-
+            debug("Test if game over when %d supply piles are empty, beginning with card %d: ", emptyPiles, testCards[startTestCard]);
             assertEquals(isGameOver(&G), expectedResult);
         }
     }

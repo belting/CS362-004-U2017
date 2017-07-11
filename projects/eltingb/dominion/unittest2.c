@@ -86,9 +86,7 @@ int main() {
                     expectedScore = getExpectedCoins(testCardCounts);
                     actualScore = scoreFor(player, &G);
 
-#if VERBOSE == 1
-                    printf("Test player %d with %d deck cards, %d hand cards, %d discard cards, using mixed cards: ", player, deckCount, handCount, discardCount);
-#endif // VERBOSE == 1
+                    debug("Test player %d with %d deck cards, %d hand cards, %d discard cards, using mixed cards: ", player, deckCount, handCount, discardCount);
                     assertEquals(actualScore, expectedScore);
 
                     // Test hands full of same card
@@ -125,9 +123,7 @@ int main() {
                         expectedScore = getExpectedCoins(testCardCounts);
                         actualScore = scoreFor(player, &G);
 
-#if VERBOSE == 1
-                        printf("Test player %d with %d deck cards, %d hand cards, %d discard cards, using card %d: ", player, deckCount, handCount, discardCount, testCards[testCard]);
-#endif // VERBOSE == 1
+                        debug("Test player %d with %d deck cards, %d hand cards, %d discard cards, using card %d: ", player, deckCount, handCount, discardCount, testCards[testCard]);
                         assertEquals(actualScore, expectedScore);
                     }
 
