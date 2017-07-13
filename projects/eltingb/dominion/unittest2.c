@@ -39,9 +39,9 @@ int main() {
     int player;
     int seed = 1000;
     int numPlayer = 2;
-    int maxHandCount = 10;
+    int maxHandCount = 5;
     int maxDeckCount = 10;
-    int maxDiscardCount = 20;
+    int maxDiscardCount = 5;
     int deckCount;
     int handCount;
     int discardCount;

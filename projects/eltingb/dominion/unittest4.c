@@ -32,8 +32,8 @@ int main() {
     int player;
     int seed = 1000;
     int numPlayer = 2;
-    int maxHandCount = 20;
-    int maxBonus = 20;
+    int maxHandCount = 10;
+    int maxBonus = 10;
     int handCount;
     int bonus;
     struct gameState G;

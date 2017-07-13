@@ -14,7 +14,7 @@ Unit tests for isGameOver() function
 #include "rngs.h"
 
 #define NUM_TEST_CARDS 27
-#define MAX_EMPTY_PILES 5
+#define MAX_EMPTY_PILES 4
 
 int main() {
     int i;
