@@ -53,21 +53,20 @@ cardtest4: cardtest4.c dominion.o rngs.o testHelpers.o
 
 unittestresults.out: unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 cardtest3 cardtest4
 	./unittest1 >> unittestresults.out
-	gcov -c -b unittest1.c >> unittestresults.out
+	gcov -c -b dominion.c >> unittestresults.out
 	./unittest2 >> unittestresults.out
-	gcov -c -b unittest2.c >> unittestresults.out
+	gcov -c -b dominion.c >> unittestresults.out
 	./unittest3 >> unittestresults.out
-	gcov -c -b unittest3.c >> unittestresults.out
+	gcov -c -b dominion.c >> unittestresults.out
 	./unittest4 >> unittestresults.out
-	gcov -c -b unittest4.c >> unittestresults.out
+	gcov -c -b dominion.c >> unittestresults.out
 	./cardtest1 >> unittestresults.out
-	gcov -c -b cardtest1.c >> unittestresults.out
+	gcov -c -b dominion.c >> unittestresults.out
 	./cardtest2 >> unittestresults.out
-	gcov -c -b cardtest2.c >> unittestresults.out
+	gcov -c -b dominion.c >> unittestresults.out
 	./cardtest3 >> unittestresults.out
-	gcov -c -b cardtest3.c >> unittestresults.out
+	gcov -c -b dominion.c >> unittestresults.out
 	./cardtest4 >> unittestresults.out
-	gcov -c -b cardtest4.c >> unittestresults.out
 	gcov -c -b dominion.c >> unittestresults.out
 	cat dominion.c.gcov >> unittestresults.out
 

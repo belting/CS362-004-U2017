@@ -1,3 +1,11 @@
+/*
+Brian Elting
+7/12/2017
+CS 362 Section 400
+
+Test helpers
+*/
+
 #ifndef TEST_HELPERS_H
 #define TEST_HELPERS_H
 
@@ -5,13 +13,13 @@
 #define VERBOSE 1
 #endif // !VERBOSE
 
-// Custom assert based on https://www.gnu.org/software/m68hc11/examples/assert_8h-source.html
 void assertFail(const char *msg, const char *file, int line);
 void assertEqualsFail(int actual, int expected, const char *file, int line);
 void assertNotEqualsFail(int actual, const char *file, int line);
 void assertPass();
 void printResults();
 
+// Custom assert based on https://www.gnu.org/software/m68hc11/examples/assert_8h-source.html
 #ifdef NDEBUG
 # define assert(EX, ACTUAL, EXPECTED)
 # define assertEquals(ACTUAL, EXPECTED)
@@ -30,6 +38,5 @@ void printResults();
 #else
 # define debug(...)
 #endif
-
 
 #endif // !TEST_HELPERS_H

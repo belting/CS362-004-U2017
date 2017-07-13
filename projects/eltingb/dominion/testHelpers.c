@@ -1,3 +1,11 @@
+/*
+Brian Elting
+7/12/2017
+CS 362 Section 400
+
+Test helpers
+*/
+
 #include <stdio.h>
 #include <stdarg.h>
 #include "testHelpers.h"
@@ -31,5 +39,5 @@ void printResults() {
         printf("ALL ");
     }
 
-    printf("%d/%d TESTS PASSED\n", passCount, testCount);
+    printf("%d/%d TESTS PASSED\n\n", passCount, testCount);
 }

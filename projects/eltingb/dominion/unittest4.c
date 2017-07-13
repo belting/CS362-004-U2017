@@ -1,3 +1,11 @@
+/*
+Brian Elting
+7/12/2017
+CS 362 Section 400
+
+Unit tests for updateCoins() function
+*/
+
 #include "dominion.h"
 #include "dominion_helpers.h"
 #include "testHelpers.h"
@@ -36,8 +44,10 @@ int main() {
     int expectedScore;
     int testCard;
 
+    printf("UNIT TEST 4\n\n");
     printf("Testing updateCoins():\n");
 
+    // Test with several different variations of predefined inputs
     for (player = 0; player < numPlayer; player++) {
         for (handCount = 0; handCount < maxHandCount; handCount++) {
             for (bonus = 0; bonus < maxBonus; bonus++) {

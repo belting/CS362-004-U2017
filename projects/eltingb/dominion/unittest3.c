@@ -1,3 +1,11 @@
+/*
+Brian Elting
+7/12/2017
+CS 362 Section 400
+
+Unit tests for isGameOver() function
+*/
+
 #include "dominion.h"
 #include "dominion_helpers.h"
 #include "testHelpers.h"
@@ -23,6 +31,7 @@ int main() {
     int testCard;
     int expectedResult;
 
+    printf("UNIT TEST 3\n\n");
     printf("Testing isGameOver():\n");
 
     // Initialize game state
@@ -32,6 +41,7 @@ int main() {
     debug("Test if game over after initializing game: ");
     assertEquals(isGameOver(&G), 0);
 
+    // Test with several different variations of predefined inputs
     for (emptyPiles = 0; emptyPiles <= MAX_EMPTY_PILES; emptyPiles++) {
         for (startTestCard = 0; startTestCard < NUM_TEST_CARDS; startTestCard++) {
             // Initialize game state

@@ -1,3 +1,11 @@
+/*
+Brian Elting
+7/12/2017
+CS 362 Section 400
+
+Unit tests for Remodel card
+*/
+
 #include "dominion.h"
 #include "dominion_helpers.h"
 #include "testHelpers.h"
@@ -51,8 +59,10 @@ int main() {
     int supplyCount[30] = { 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 };
     int result;
 
+    printf("CARD TEST 3\n\n");
     printf("Testing playRemodel():\n");
 
+    // Test with several different variations of predefined inputs
     for (player = 0; player < numPlayer; player++) {
         for (handCount = 2; handCount < maxHandCount; handCount++) {
             for (trashCardPos = 1; trashCardPos < handCount; trashCardPos++) {

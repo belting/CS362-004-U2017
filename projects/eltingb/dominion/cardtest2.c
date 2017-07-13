@@ -1,3 +1,11 @@
+/*
+Brian Elting
+7/12/2017
+CS 362 Section 400
+
+Unit tests for Adventurer card
+*/
+
 #include "dominion.h"
 #include "dominion_helpers.h"
 #include "testHelpers.h"
@@ -27,8 +35,10 @@ int main() {
     int expectedDiscardCount;
     int treasuresFound;
 
+    printf("CARD TEST 2\n\n");
     printf("Testing playAdventurer():\n");
 
+    // Test with several different variations of predefined inputs
     for (player = 0; player < numPlayer; player++) {
         for (handCount = 1; handCount < maxHandCount; handCount++) {
             for (deckCount = 3; deckCount < maxDeckCount; deckCount++) {

@@ -1,3 +1,11 @@
+/*
+Brian Elting
+7/12/2017
+CS 362 Section 400
+
+Unit tests for fullDeckCount() function
+*/
+
 #include "dominion.h"
 #include "dominion_helpers.h"
 #include "testHelpers.h"
@@ -25,8 +33,10 @@ int main() {
     int actualCount;
     int expectedCount;
 
+    printf("UNIT TEST 1\n\n");
     printf("Testing fullDeckCount():\n");
 
+    // Test with several different variations of predefined inputs
     for (player = 0; player < numPlayer; player++) {
         for (deckCount = 0; deckCount < maxDeckCount; deckCount++) {
             for (handCount = 0; handCount < maxHandCount; handCount++) {
