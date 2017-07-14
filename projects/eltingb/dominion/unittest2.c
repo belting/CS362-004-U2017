@@ -15,7 +15,7 @@ Unit tests for scoreFor() function
 
 #define NUM_TEST_CARDS 6
 
-int getExpectedCoins(int cards[]) {
+int getExpectedScore(int cards[]) {
     int i;
     int cardCount = 0;
     int score = 0;
@@ -93,7 +93,7 @@ int main() {
                         testCardCounts[i % NUM_TEST_CARDS]++;
                     }
 
-                    expectedScore = getExpectedCoins(testCardCounts);
+                    expectedScore = getExpectedScore(testCardCounts);
                     actualScore = scoreFor(player, &G);
 
                     debug("Test player %d with %d deck cards, %d hand cards, %d discard cards, using mixed cards: ", player, deckCount, handCount, discardCount);
@@ -130,7 +130,7 @@ int main() {
                             testCardCounts[testCard]++;
                         }
 
-                        expectedScore = getExpectedCoins(testCardCounts);
+                        expectedScore = getExpectedScore(testCardCounts);
                         actualScore = scoreFor(player, &G);
 
                         debug("Test player %d with %d deck cards, %d hand cards, %d discard cards, using card %d: ", player, deckCount, handCount, discardCount, testCards[testCard]);
