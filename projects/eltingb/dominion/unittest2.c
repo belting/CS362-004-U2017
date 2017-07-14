@@ -111,6 +111,7 @@ int main() {
                         }
 
                         // Add cards to deck
+                        G.deckCount[player] = deckCount;
                         for (i = 0; i < deckCount; i++) {
                             G.deck[player][i] = testCards[testCard];
                             testCardCounts[testCard]++;
