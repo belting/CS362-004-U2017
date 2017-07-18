@@ -2,17 +2,43 @@
 #include<string.h>
 #include<stdlib.h>
 #include<time.h>
+#include<math.h>
+
+#define FIRST_CHAR 31
+#define NUM_CHARS 96
+#define STR_LENGTH 5
+#define NULL_CHAR '\0'
+#define FIRST_STR_CHAR 'e'
+#define NUM_STR_CHARS 16
+
+char randomStringChar()
+{
+    return FIRST_STR_CHAR + floor((double)rand() / (double)RAND_MAX * NUM_STR_CHARS);
+}
 
 char inputChar()
 {
-    // TODO: rewrite this function
-    return ' ';
+    char randomChar = FIRST_CHAR + floor((double)rand() / (double)RAND_MAX * NUM_CHARS);
+
+    if (randomChar == FIRST_CHAR) {
+        return NULL_CHAR;
+    }
+    
+    return randomChar;
 }
 
 char *inputString()
 {
-    // TODO: rewrite this function
-    return "";
+    int i;
+    char *str = malloc(STR_LENGTH * sizeof(char));
+
+    for (i = 0; i < STR_LENGTH; i++) {
+        str[i] = randomStringChar();
+    }
+    
+    str[STR_LENGTH] = NULL_CHAR;
+
+    return str;
 }
 
 void testme()
@@ -45,6 +71,8 @@ void testme()
       printf("error ");
       exit(200);
     }
+
+    free(s);
   }
 }
 
