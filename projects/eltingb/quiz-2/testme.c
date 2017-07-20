@@ -30,7 +30,7 @@ char inputChar()
 char *inputString()
 {
     int i;
-    char *str = malloc(STR_LENGTH * sizeof(char));
+    char *str = malloc((STR_LENGTH + 1) * sizeof(char));
 
     for (i = 0; i < STR_LENGTH; i++) {
         str[i] = randomStringChar();
