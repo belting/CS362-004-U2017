@@ -25,10 +25,10 @@ void checkPlaySmithy(int n, int p, struct gameState *post) {
     memcpy(&pre, post, sizeof(struct gameState));
     r = playSmithy(post, p, handPos);
 
-    if (pre.deckCount[p] >= 3) {
-        pre.playedCards[pre.playedCardCount] = pre.hand[p][handPos];
-        pre.playedCardCount++;
+    pre.playedCards[pre.playedCardCount] = pre.hand[p][handPos];
+    pre.playedCardCount++;
 
+    if (pre.deckCount[p] >= 3) {
         pre.handCount[p] += 2;
         pre.hand[p][pre.handCount[p] - 2] = pre.deck[p][pre.deckCount[p] - 1];
         pre.hand[p][pre.handCount[p] - 1] = pre.deck[p][pre.deckCount[p] - 2];
@@ -41,8 +41,6 @@ void checkPlaySmithy(int n, int p, struct gameState *post) {
         drawableCount = (cardCount >= 3)
             ? 3
             : cardCount;
-        pre.playedCards[pre.playedCardCount] = pre.hand[p][handPos];
-        pre.playedCardCount++;
 
         memcpy(pre.deck[p], post->deck[p], sizeof(int) * pre.discardCount[p]);
         memcpy(pre.discard[p], post->discard[p], sizeof(int)*pre.discardCount[p]);
@@ -57,51 +55,12 @@ void checkPlaySmithy(int n, int p, struct gameState *post) {
         pre.discardCount[p] = 0;
     }
     else {
-        pre.playedCards[pre.playedCardCount] = pre.hand[p][handPos];
-        pre.playedCardCount++;
         pre.handCount[p]--;
         pre.hand[p][handPos] = post->hand[p][handPos];
         pre.hand[p][post->handCount[p]] = post->hand[p][post->handCount[p]];
-
     }
 
-    /*debug("Deck count ");
-    assertEquals(pre.deckCount[p], post->deckCount[p]);
-
-    debug("Hand count ");
-    assertEquals(pre.handCount[p], post->handCount[p]);
-
-    debug("Discard count ");
-    assertEquals(pre.discardCount[p], post->discardCount[p]);
-
-    debug("Played count ");
-    assertEquals(pre.playedCardCount, post->playedCardCount);
-
-    for (i = 0; i < MAX_DECK; i++) {
-        debug("Deck card %d ", i);
-        assertEquals(pre.deck[p][i], post->deck[p][i]);
-    }
-
-    for (i = 0; i < MAX_HAND; i++) {
-        debug("Hand card %d ", i);
-        assertEquals(pre.hand[p][i], post->hand[p][i]);
-    }
-
-    for (i = 0; i < MAX_DECK; i++) {
-        debug("Discard card %d ", i);
-        assertEquals(pre.discard[p][i], post->discard[p][i]);
-    }
-
-    for (i = 0; i < post->playedCardCount; i++) {
-        debug("Played card %d ", i);
-        assertEquals(pre.playedCards[i], post->playedCards[i]);
-    }*/
-
-    debug("Test iteration %d return value ", n);
-    assertEquals(r, 0);
-
-    debug("Test iteration %d game state ", n);
-    assertEquals(memcmp(&pre, post, sizeof(struct gameState)), 0);
+    printRandomTestResult(post, &pre, p, r, n);
 }
 
 int main() {
@@ -110,7 +69,7 @@ int main() {
     int n;
     int p;
 
-    printf("RANDOM CARD TEST 1\n\n");
+    printf("RANDOM TEST CARD 1\n\n");
     printf("Testing playSmithy():\n");
 
     SelectStream(2);

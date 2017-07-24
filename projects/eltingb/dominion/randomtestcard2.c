@@ -47,43 +47,7 @@ void checkPlayVillage(int n, int p, struct gameState *post) {
         pre.hand[p][post->handCount[p]] = post->hand[p][post->handCount[p]];
     }
 
-    /*debug("Deck count ");
-    assertEquals(pre.deckCount[p], post->deckCount[p]);
-
-    debug("Hand count ");
-    assertEquals(pre.handCount[p], post->handCount[p]);
-
-    debug("Discard count ");
-    assertEquals(pre.discardCount[p], post->discardCount[p]);
-
-    debug("Played count ");
-    assertEquals(pre.playedCardCount, post->playedCardCount);
-
-    for (i = 0; i < MAX_DECK; i++) {
-    debug("Deck card %d ", i);
-    assertEquals(pre.deck[p][i], post->deck[p][i]);
-    }
-
-    for (i = 0; i < MAX_HAND; i++) {
-    debug("Hand card %d ", i);
-    assertEquals(pre.hand[p][i], post->hand[p][i]);
-    }
-
-    for (i = 0; i < MAX_DECK; i++) {
-    debug("Discard card %d ", i);
-    assertEquals(pre.discard[p][i], post->discard[p][i]);
-    }
-
-    for (i = 0; i < post->playedCardCount; i++) {
-    debug("Played card %d ", i);
-    assertEquals(pre.playedCards[i], post->playedCards[i]);
-    }*/
-
-    debug("Test iteration %d return value ", n);
-    assertEquals(r, 0);
-
-    debug("Test iteration %d game state ", n);
-    assertEquals(memcmp(&pre, post, sizeof(struct gameState)), 0);
+    printRandomTestResult(post, &pre, p, r, n);
 }
 
 int main() {
@@ -92,7 +56,7 @@ int main() {
     int n;
     int p;
 
-    printf("RANDOM CARD TEST 2\n\n");
+    printf("RANDOM TEST CARD 2\n\n");
     printf("Testing playVillage():\n");
 
     SelectStream(2);
