@@ -81,17 +81,17 @@ randomtestadventurer: randomtestadventurer.c dominion.o rngs.o testHelpers.o
 
 randomtestcard1.out: randomtestcard1
 	./randomtestcard1 >> randomtestcard1.out
-	gcov dominion.c >> randomtestcard1.out
+	gcov -c -b dominion.c >> randomtestcard1.out
 	cat dominion.c.gcov >> randomtestcard1.out
 
 randomtestcard2.out: randomtestcard2
 	./randomtestcard2 >> randomtestcard2.out
-	gcov dominion.c >> randomtestcard2.out
+	gcov -c -b dominion.c >> randomtestcard2.out
 	cat dominion.c.gcov >> randomtestcard2.out
 
 randomtestadventurer.out: randomtestadventurer
 	./randomtestadventurer >> randomtestadventurer.out
-	gcov dominion.c >> randomtestadventurer.out
+	gcov -c -b dominion.c >> randomtestadventurer.out
 	cat dominion.c.gcov >> randomtestadventurer.out
 
 runtests: testDrawCard 
