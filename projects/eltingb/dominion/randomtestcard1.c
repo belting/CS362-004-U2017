@@ -14,6 +14,7 @@ Random tests for Smithy card
 #include <math.h>
 #include "rngs.h"
 
+// Test Smithy with provided game state
 void checkPlaySmithy(int n, int p, struct gameState *post) {
     int r;
     int handPos = 0;
@@ -22,12 +23,15 @@ void checkPlaySmithy(int n, int p, struct gameState *post) {
     int cardCount;
     int drawableCount;
 
+    // Copy game state
     memcpy(&pre, post, sizeof(struct gameState));
     r = playSmithy(post, p, handPos);
 
+    // Set expected played cards
     pre.playedCards[pre.playedCardCount] = pre.hand[p][handPos];
     pre.playedCardCount++;
 
+    // Set expected state when deck has at least 3 cards
     if (pre.deckCount[p] >= 3) {
         pre.handCount[p] += 2;
         pre.hand[p][pre.handCount[p] - 2] = pre.deck[p][pre.deckCount[p] - 1];
@@ -36,6 +40,7 @@ void checkPlaySmithy(int n, int p, struct gameState *post) {
         pre.hand[p][pre.handCount[p]] = -1;
         pre.deckCount[p] -= 3;
     }
+    // Set expected state when deck must be shuffled
     else if (pre.deckCount[p] + pre.discardCount[p] > 0) {
         cardCount = pre.deckCount[p] + pre.discardCount[p];
         drawableCount = (cardCount >= 3)
@@ -54,12 +59,14 @@ void checkPlaySmithy(int n, int p, struct gameState *post) {
         pre.deckCount[p] = pre.discardCount[p] - (drawableCount - pre.deckCount[p]);
         pre.discardCount[p] = 0;
     }
+    // Set expected state when deck and discard pile are empty
     else {
         pre.handCount[p]--;
         pre.hand[p][handPos] = post->hand[p][handPos];
         pre.hand[p][post->handCount[p]] = post->hand[p][post->handCount[p]];
     }
 
+    // Compare actual and expected game states
     printRandomTestResult(post, &pre, p, r, n);
 }
 
@@ -75,7 +82,9 @@ int main() {
     SelectStream(2);
     PutSeed(3);
 
+    // Run tests 10,000 times
     for (n = 0; n < 10000; n++) {
+        // Set random game state
         for (i = 0; i < sizeof(struct gameState); i++) {
             ((char*)&G)[i] = floor(Random() * 256);
         }
@@ -84,6 +93,8 @@ int main() {
         G.discardCount[p] = floor(Random() * MAX_DECK);
         G.handCount[p] = floor(Random() * (MAX_HAND - 1)) + 1;
         G.playedCardCount = floor(Random() * MAX_DECK);
+
+        // Test Smithy with randomized game state
         checkPlaySmithy(n, p, &G);
     }
 

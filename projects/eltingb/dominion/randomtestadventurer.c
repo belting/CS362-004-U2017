@@ -14,6 +14,7 @@ Random tests for Adventurer card
 #include <math.h>
 #include "rngs.h"
 
+// Get one of the following treasure cards randomly: Copper, Silver, Gold
 int getRandomTreasureCard() {
     int num = floor(Random() * 3);
 
@@ -28,10 +29,12 @@ int getRandomTreasureCard() {
     }
 }
 
+// Check if the provided card is a treasure card
 int isTreasureCard(int card) {
     return card == copper || card == silver || card == gold;
 }
 
+// Count the number of treasure cards in the provided pile
 int countTreasureCards(int cards[], int n) {
     int i;
     int count = 0;
@@ -45,6 +48,7 @@ int countTreasureCards(int cards[], int n) {
     return count;
 }
 
+// Get the index of the next treasure card in the provided pile (looping in reverse)
 int getNextTreasureCardIndex(int cards[], int start) {
     int i;
 
@@ -57,16 +61,20 @@ int getNextTreasureCardIndex(int cards[], int start) {
     return -1;
 }
 
+// Randomly insert treasure cards into deck/discard pile
 void addTreasureCards(int p, struct gameState *state) {
     int treasuresAdded = 0;
     int deckPos = -1;
     int discardPos = -1;
     int pos;
 
+    // Randomly choose number of treasures to add
     int treasureCount = 2 + floor(Random() * 2);
 
+    // Loop until we have added the chosen number of treasures
     while (treasuresAdded < treasureCount) {
         if ((int)floor(Random() * 2) % 2 && state->deckCount[p] > 0) {
+            // Add treasure card to deck
             pos = floor(Random() * state->deckCount[p]);
             if (pos != deckPos) {
                 deckPos = pos;
@@ -75,6 +83,7 @@ void addTreasureCards(int p, struct gameState *state) {
             }
         }
         else if (state->discardCount[p] > 0) {
+            // Add treasure card to discard pile
             pos = floor(Random() * state->discardCount[p]);
             if (pos != discardPos) {
                 discardPos = pos;
@@ -85,6 +94,7 @@ void addTreasureCards(int p, struct gameState *state) {
     }
 }
 
+// Test Adventurer with provided game state
 void checkPlayAdventurer(int n, int p, struct gameState *post) {
     int r;
     int handPos = 0;
@@ -92,12 +102,15 @@ void checkPlayAdventurer(int n, int p, struct gameState *post) {
     int treasureIndex;
     int cardsDrawn = 0;
 
+    // Copy game state
     memcpy(&pre, post, sizeof(struct gameState));
     r = playAdventurer(post, p);
 
+    // Set expected played cards
     pre.playedCards[pre.playedCardCount] = pre.hand[p][handPos];
     pre.playedCardCount++;
 
+    // Set expected state when deck has at least 2 treasure cards
     if (countTreasureCards(pre.deck[p], pre.deckCount[p]) >= 2) {
         pre.handCount[p] += 1;
         treasureIndex = getNextTreasureCardIndex(pre.deck[p], pre.deckCount[p] - 1);
@@ -110,6 +123,7 @@ void checkPlayAdventurer(int n, int p, struct gameState *post) {
         pre.discardCount[p] += cardsDrawn - 2;
         memcpy(pre.discard[p], post->discard[p], sizeof(int)*pre.discardCount[p]);
     }
+    // Set expected state when discard pile must be used to find treasure cards
     else {
         memcpy(pre.deck[p], post->deck[p], sizeof(int) * MAX_DECK);
         memcpy(pre.discard[p], post->discard[p], sizeof(int) * MAX_DECK);
@@ -120,6 +134,7 @@ void checkPlayAdventurer(int n, int p, struct gameState *post) {
         pre.deckCount[p] = post->deckCount[p];
     }
 
+    // Compare actual and expected game states
     printRandomTestResult(post, &pre, p, r, n);
 }
 
@@ -137,7 +152,9 @@ int main() {
     SelectStream(2);
     PutSeed(3);
 
+    // Run tests 10,000 times
     for (n = 0; n < 10000; n++) {
+        // Set random game state
         for (i = 0; i < sizeof(struct gameState); i++) {
             ((char*)&G)[i] = floor(Random() * 256);
         }
@@ -152,7 +169,10 @@ int main() {
         G.handCount[p] = floor(Random() * (MAX_HAND - 3)) + 1;
         G.playedCardCount = floor(Random() * MAX_DECK);
 
+        // Add treasure cards to deck/discard piles
         addTreasureCards(p, &G);
+
+        // Test Adventurer with randomized game state
         checkPlayAdventurer(n, p, &G);
     }
 
