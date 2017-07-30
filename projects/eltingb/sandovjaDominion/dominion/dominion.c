@@ -277,7 +277,7 @@ int playAdventurerCard(struct gameState *state, int temphand[], int z){
 
       while(drawntreasure<2){
       // BUG: introduced to miss empty decks. should be < 1
-  if (state->deckCount[currentPlayer] < 1){//if the deck is empty we need to shuffle discard and add to deck
+  if (state->deckCount[currentPlayer] < 0){//if the deck is empty we need to shuffle discard and add to deck
     shuffle(currentPlayer, state);
   }
   drawCard(currentPlayer, state);
@@ -301,7 +301,7 @@ int playAdventurerCard(struct gameState *state, int temphand[], int z){
 int playSmithyCard(int handPos, struct gameState *state, int currentPlayer){
 
   // BUG: introduced to draw 4 cards instead of 3.
-  for (int i = 0; i < 3; i++)
+  for (int i = 0; i < 4; i++)
   {
     drawCard(currentPlayer, state);
   }
