@@ -77,6 +77,9 @@ int main() {
                     G.discardCount[player] = 0;
                     memcpy(&G.supplyCount, &supplyCount, (treasure_map + 1) * sizeof(int));
 
+                    // Initialize player
+                    G.whoseTurn = player;
+
                     // Copy game state
                     memcpy(&testG, &G, sizeof(struct gameState));
 
@@ -86,7 +89,7 @@ int main() {
                     gainCard = testGain[gainCardPos];
                     trashCard = testHand[trashCardPos];
                     // Play Remodel card
-                    result = playRemodel(&G, player, trashCardPos, gainCard, 0);
+                    result = cardEffect(remodel, trashCardPos, gainCard, 0, &G, 0, 0);
 
                     expectedCanPlay = getCardCost(trashCard) + 2 >= getCardCost(gainCard);
 

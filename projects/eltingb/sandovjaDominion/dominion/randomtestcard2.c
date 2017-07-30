@@ -22,7 +22,7 @@ void checkPlayVillage(int n, int p, struct gameState *post) {
 
     // Copy game state
     memcpy(&pre, post, sizeof(struct gameState));
-    r = playVillage(post, p, handPos);
+    r = cardEffect(village, 0, 0, 0, post, handPos, 0);
 
     // Set expected number of actions
     pre.numActions += 2;
@@ -81,6 +81,9 @@ int main() {
         G.discardCount[p] = floor(Random() * MAX_DECK);
         G.handCount[p] = floor(Random() * (MAX_HAND - 1)) + 1;
         G.playedCardCount = floor(Random() * MAX_DECK);
+
+        // Set player
+        G.whoseTurn = p;
 
         // Test Village with randomized game state
         checkPlayVillage(n, p, &G);

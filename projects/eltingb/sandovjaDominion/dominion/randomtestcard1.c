@@ -25,7 +25,7 @@ void checkPlaySmithy(int n, int p, struct gameState *post) {
 
     // Copy game state
     memcpy(&pre, post, sizeof(struct gameState));
-    r = playSmithy(post, p, handPos);
+    r = playSmithyCard(handPos, post, p);
 
     // Set expected played cards
     pre.playedCards[pre.playedCardCount] = pre.hand[p][handPos];

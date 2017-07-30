@@ -101,10 +101,14 @@ void checkPlayAdventurer(int n, int p, struct gameState *post) {
     struct gameState pre;
     int treasureIndex;
     int cardsDrawn = 0;
+    int tempHand[MAX_HAND];
+    int z = 0;
 
     // Copy game state
     memcpy(&pre, post, sizeof(struct gameState));
-    r = playAdventurer(post, p);
+
+    // Play Adventurer card
+    r = playAdventurerCard(post, tempHand, z);
 
     // Set expected played cards
     pre.playedCards[pre.playedCardCount] = pre.hand[p][handPos];
@@ -171,6 +175,9 @@ int main() {
 
         // Add treasure cards to deck/discard piles
         addTreasureCards(p, &G);
+
+        // Set player
+        G.whoseTurn = p;
 
         // Test Adventurer with randomized game state
         checkPlayAdventurer(n, p, &G);

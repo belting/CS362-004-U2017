@@ -56,7 +56,7 @@ int main() {
                 assertEquals(G.hand[player][0], smithy);
 
                 // Play Smithy card
-                playSmithy(&G, player, 0);
+                playSmithyCard(0, &G, player);
 
                 debug("Test player %d with %d hand cards, %d deck cards, check smithy removed from hand after play: ", player, handCount, deckCount);
                 assertNotEquals(G.hand[player][0], smithy);

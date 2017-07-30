@@ -52,6 +52,9 @@ int main() {
                 // Initialize number of actions
                 G.numActions = 1;
 
+                // Initialize player
+                G.whoseTurn = player;
+
                 // Copy game state
                 memcpy(&testG, &G, sizeof(struct gameState));
 
@@ -59,7 +62,7 @@ int main() {
                 assertEquals(G.hand[player][0], village);
 
                 // Play Village card
-                playVillage(&G, player, 0);
+                cardEffect(village, 0, 0, 0, &G, 0, 0);
 
                 debug("Test player %d with %d hand cards, %d deck cards, check village removed from hand after play: ", player, handCount, deckCount);
                 assertNotEquals(G.hand[player][0], village);

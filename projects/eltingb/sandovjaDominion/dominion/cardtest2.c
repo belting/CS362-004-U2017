@@ -34,6 +34,8 @@ int main() {
     int deckPos;
     int expectedDiscardCount;
     int treasuresFound;
+    int tempHand[MAX_HAND];
+    int z = 0;
 
     printf("CARD TEST 2\n\n");
     printf("Testing playAdventurer():\n");
@@ -80,6 +82,9 @@ int main() {
                     i--;
                 }
 
+                // Initialize player
+                G.whoseTurn = player;
+
                 // Copy game state
                 memcpy(&testG, &G, sizeof(struct gameState));
 
@@ -87,7 +92,7 @@ int main() {
                 assertEquals(G.hand[player][0], adventurer);
 
                 // Play Adventurer card
-                playAdventurer(&G, player);
+                playAdventurerCard(&G, tempHand, z);
 
                 debug("Test player %d with %d hand cards, %d deck cards, check adventurer removed from hand after play: ", player, handCount, deckCount);
                 assertNotEquals(G.hand[player][0], adventurer);
