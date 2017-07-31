@@ -49,3 +49,5 @@ The above loop iterates 4 times, whereas it should only iterate 3 times as
 follows:
 
     for (int i = 0; i < 3; i++)
+
+This bug can be tested with cardtest1.c and randomtestcard1.c.

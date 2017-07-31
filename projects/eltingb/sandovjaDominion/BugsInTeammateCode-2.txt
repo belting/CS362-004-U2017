@@ -47,3 +47,5 @@ the discardCard function immediately preceding this return statement to discard
 the Adventurer card. The card's hand position will need to be added as a
 parameter to the playAdventurerCard function in order to pass it along to the
 discardCard function.
+
+This bug can be tested with cardtest2.c and randomtestadventurer.c.
