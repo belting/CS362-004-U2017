@@ -1,0 +1,51 @@
+Bug Report 1
+==============================
+
+Title: Playing Smithy Draws Extra Card
+
+Class: Minor Bug
+
+Date: 7/30/2017
+Reported By: Brian Elting
+Email: eltingb@oregonstate.edu
+
+Product: Dominion game
+Platform: Windows 10
+
+Is it reproducible: Yes
+
+Description
+===========
+When a player plays the Smithy card, 4 cards are drawn from the deck instead of
+the 3 cards dictated by the game rules.
+
+
+Steps to Produce/Reproduce
+--------------------------
+1. Start a Dominion game
+2. Acquire a Smithy card
+4. Examine the cards in hand
+3. Play the Smithy card
+4. Examine the cards in hand to see 1 too many cards were drawn
+
+
+Expected Results
+----------------
+Player should have 3 more cards in hand after playing Smithy.
+
+
+Actual Results
+--------------
+Player has 4 more cards in hand after playing Smithy.
+
+
+Other Information
+-----------------
+This bug occurs on line 304 of dominion.c, within the playSmithyCard function:
+
+    for (int i = 0; i < 4; i++)
+
+The above loop iterates 4 times, whereas it should only iterate 3 times as
+follows:
+
+    for (int i = 0; i < 3; i++)
