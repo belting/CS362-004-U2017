@@ -18,8 +18,8 @@
 
 import junit.framework.TestCase;
 
-
-
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -59,10 +59,73 @@ public class UrlValidatorTest extends TestCase {
    
    public void testIsValid()
    {
-	   for(int i = 0;i<10000;i++)
-	   {
-		   
-	   }
+       // Initialize URL validator
+       UrlValidator urlValidator = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
+
+       // Initialize URL parts
+       List<ResultPair> schemes = new ArrayList<>();
+       schemes.add(new ResultPair("http://", true));
+       schemes.add(new ResultPair("http:/", false));
+       schemes.add(new ResultPair("http:", false));
+       schemes.add(new ResultPair("http", false));
+       schemes.add(new ResultPair("https://", true));
+       schemes.add(new ResultPair("ftp://", true));
+       schemes.add(new ResultPair("smtp://", true));
+       schemes.add(new ResultPair("123://", false));
+
+       List<ResultPair> authorities = new ArrayList<>();
+       authorities.add(new ResultPair("www.yahoo.com", true));
+       authorities.add(new ResultPair("yahoo.com", true));
+       authorities.add(new ResultPair("yahoo.co", true));
+       authorities.add(new ResultPair("123.123.123.123", true));
+       authorities.add(new ResultPair(".123.123.123.123", false));
+       authorities.add(new ResultPair("123.123.123.123.", true));
+       authorities.add(new ResultPair("123.123.123", false));
+       authorities.add(new ResultPair("123.com", true));
+       authorities.add(new ResultPair(".com", false));
+
+       List<ResultPair> ports = new ArrayList<>();
+       ports.add(new ResultPair(":80", true));
+       ports.add(new ResultPair(":12345", true));
+       ports.add(new ResultPair(":", false));
+       ports.add(new ResultPair("", true));
+
+       List<ResultPair> paths = new ArrayList<>();
+       paths.add(new ResultPair("/", true));
+       paths.add(new ResultPair("/one", true));
+       paths.add(new ResultPair("/one/", true));
+       paths.add(new ResultPair("/one/two", true));
+       paths.add(new ResultPair("/one/two/", true));
+       paths.add(new ResultPair("", true));
+       paths.add(new ResultPair("/.", false));
+
+       List<ResultPair> queries = new ArrayList<>();
+       queries.add(new ResultPair("", true));
+       queries.add(new ResultPair("?", true));
+       queries.add(new ResultPair("?one", true));
+       queries.add(new ResultPair("?one=two", true));
+       queries.add(new ResultPair("?one=two&three=4", true));
+
+       // Loop through all combinations of URL parts
+       schemes.forEach(scheme -> {
+           authorities.forEach(authority -> {
+               ports.forEach(port -> {
+                   paths.forEach(path -> {
+                       queries.forEach(query -> {
+                           // Build URL
+                           String url = String.format("%s%s%s%s%s", scheme.item, authority.item, port.item, path.item, query.item);
+
+                           // Get expected and actual results
+                           boolean expected = scheme.valid && authority.valid && port.valid && path.valid && query.valid;
+                           boolean actual = urlValidator.isValid(url);
+
+                           // Perform assertion
+                           assertEquals(url, expected, actual);
+                       });
+                   });
+               });
+           });
+       });
    }
    
    public void testAnyOtherUnitTest()
