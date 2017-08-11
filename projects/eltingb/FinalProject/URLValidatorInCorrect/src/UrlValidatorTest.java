@@ -98,7 +98,7 @@ public class UrlValidatorTest extends TestCase {
        paths.add(new ResultPair("/one/two", true));
        paths.add(new ResultPair("/one/two/", true));
        paths.add(new ResultPair("", true));
-       paths.add(new ResultPair("/.", false));
+       paths.add(new ResultPair("/..", false));
 
        List<ResultPair> queries = new ArrayList<>();
        queries.add(new ResultPair("", true));
