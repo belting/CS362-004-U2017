@@ -29,26 +29,41 @@ import java.util.List;
  */
 public class UrlValidatorTest extends TestCase {
 
-    private boolean printStatus = false;
-    private boolean printIndex = false;//print index that indicates current scheme,host,port,path, query test were using.
-
     public UrlValidatorTest(String testName) {
         super(testName);
     }
 
-
+    // Manual tests were conducted with the following URLs:
+    //    https://www.google.com
+    //    http://www.yahoo.com
+    //    https://www.cbssports.com
+    //    https://cbssports.com
+    //    https://www.cbssports.com/fantasy
+    //    www.cbssports.com
+    //    htp://cbssports.com
+    //    http://dmv.org
+    //    "" (empty URL)
+    //    http://1.1.1.1
+    //    http://www.fantasyfootballnerds.com/?player=rankings
+    //    www.fantasyfootballnerds
+    //    http:/www.google.com
+    //    http://
+    //    https://.com
+    //    http://a.b.c.net
+    //    http://www.yahoo.com?one=two
+    //    http://www.yahoo.com:12345/
+    //    http://256.256.256.256
     public void testManualTest() {
         UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
-        System.out.println(urlVal.isValid("http://www.amazon.com"));
-
-
+        System.out.println(urlVal.isValid("https://www.google.com"));
     }
 
-
+    // Input partitioning tests for schemes
     public void testYourFirstPartition() {
         // Initialize URL validator
         UrlValidator urlValidator = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
 
+        // Initialize URL parts
         List<ResultPair> partitions = new ArrayList<>();
         partitions.add(new ResultPair("http://", true));
         partitions.add(new ResultPair("https://", true));
@@ -86,10 +101,12 @@ public class UrlValidatorTest extends TestCase {
         });
     }
 
+    // Input partitioning tests for authorities
     public void testYourSecondPartition() {
         // Initialize URL validator
         UrlValidator urlValidator = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
 
+        // Initialize URL parts
         List<ResultPair> partitions = new ArrayList<>();
         partitions.add(new ResultPair("0.0.0.0", true));
         partitions.add(new ResultPair("somelink.com", true));
@@ -127,10 +144,12 @@ public class UrlValidatorTest extends TestCase {
         });
     }
 
+    // Input partitioning tests for ports
     public void testYourThirdPartition() {
         // Initialize URL validator
         UrlValidator urlValidator = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
 
+        // Initialize URL parts
         List<ResultPair> partitions = new ArrayList<>();
         partitions.add(new ResultPair(":80", true));
         partitions.add(new ResultPair(":65535", true));
@@ -159,10 +178,12 @@ public class UrlValidatorTest extends TestCase {
         });
     }
 
+    // Input partitioning tests for paths
     public void testYourFourthPartition() {
         // Initialize URL validator
         UrlValidator urlValidator = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
 
+        // Initialize URL parts
         List<ResultPair> partitions = new ArrayList<>();
         partitions.add(new ResultPair("/", true));
         partitions.add(new ResultPair("/path", true));
@@ -190,10 +211,12 @@ public class UrlValidatorTest extends TestCase {
         });
     }
 
+    // Input partitioning tests for queries
     public void testYourFifthPartition() {
         // Initialize URL validator
         UrlValidator urlValidator = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
 
+        // Initialize URL parts
         List<ResultPair> partitions = new ArrayList<>();
         partitions.add(new ResultPair("", true));
         partitions.add(new ResultPair("?value=", true));
@@ -216,7 +239,7 @@ public class UrlValidatorTest extends TestCase {
         });
     }
 
-
+    // Unit tests
     public void testIsValid() {
         // Initialize URL validator
         UrlValidator urlValidator = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
@@ -294,16 +317,5 @@ public class UrlValidatorTest extends TestCase {
             });
         });
     }
-
-    public void testAnyOtherUnitTest() {
-
-    }
-    /**
-     * Create set of tests by taking the testUrlXXX arrays and
-     * running through all possible permutations of their combinations.
-     *
-     * @param testObjects Used to create a url.
-     */
-
 
 }
